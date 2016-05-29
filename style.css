@@ -2,6 +2,10 @@
     border: solid 1px black;
 }
 
+#canvas:hover{
+    cursor: pointer;
+}
+
 .con{
     position: absolute;
     padding: 20px;
