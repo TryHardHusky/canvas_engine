@@ -20,6 +20,7 @@ engine.last_update = new Date().getTime();
 engine.past_update = new Date().getTime();
 
 engine.create_canvas = function () {
+    engine.canvas.tileSize = $con.find(".size").val();
     engine.canvas.col_count = $con.find(".col").val();
     engine.canvas.row_count = $con.find(".row").val();
     engine.canvas.height = (engine.canvas.row_count * engine.canvas.tileSize);
