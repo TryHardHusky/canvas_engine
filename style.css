@@ -1,0 +1,14 @@
+#canvas{
+    border: solid 1px black;
+}
+
+.con{
+    position: absolute;
+    padding: 20px;
+    top: 10px;
+    right: 10px;
+}
+
+.con input{
+    font-size: 15px;
+}
