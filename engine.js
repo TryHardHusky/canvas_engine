@@ -30,7 +30,10 @@ engine.mouse.tileY = 0;
 
 engine.keys = {};
 engine.last_update = new Date().getTime();
-engine.past_update = new Date().getTime();
+engine._fps = 0;
+engine.fps = 0;
+
+engine.path = {};
 
 $canvas.on('click', function (e) {
     engine.mouse.x = e.offsetX;
@@ -40,8 +43,8 @@ $canvas.on('click', function (e) {
 });
 
 engine.create_canvas = function () {
-    engine.canvas.col_count = 20;
-    engine.canvas.row_count = 20;
+    engine.canvas.col_count = 25;
+    engine.canvas.row_count = 25;
     engine.canvas.height = (engine.canvas.row_count * engine.canvas.tileSize);
     engine.canvas.width = (engine.canvas.col_count * engine.canvas.tileSize);
     for (var c = 0; c < engine.canvas.col_count; c++) {
@@ -50,10 +53,10 @@ engine.create_canvas = function () {
         for (var r = 0; r < engine.canvas.row_count; r++) {
             var x = Math.random(), t;
             if (x > 0 && x < 0.25) t = 300;
-            if (x > 0.25 && x < 0.5) t = 301;
-            if (x > 0.5 && x < 0.55) t = 302;
-            if (x > 0.55 && x < 0.6) t = 332;
-            if (x > 0.6 && x < 0.7) t = 331;
+            if (x > 0.25 && x < 0.57) t = 301;
+            if (x > 0.57 && x < 0.58) t = 302;
+            if (x > 0.58 && x < 0.59) t = 332;
+            if (x > 0.59 && x < 0.7) t = 331;
             if (x > 0.7 && x < 1) t = 330;
             engine.current_level[c].push(t);
             engine.layers[c].push(1);
@@ -143,7 +146,21 @@ engine.draw = function () {
     }
 };
 
+
+engine.count_frame = function(){
+    var now = new Date().getTime();
+    if( ( engine.last_update + 1000 ) <= now){
+
+        engine.last_update = now;
+        engine.fps = engine._fps;
+        engine._fps = 0;
+
+    } else engine._fps++;
+
+};
+
 engine.update = function () {
+    engine.count_frame();
 
 
     //var aa = Math.floor(Math.random() * engine.canvas.col_count);
@@ -152,15 +169,12 @@ engine.update = function () {
 
 
     // Get Delay between updates
-    engine.last_update = new Date().getTime();
-    engine.update_delay = (engine.last_update - engine.past_update);
-    engine.past_update = engine.last_update;
 
     engine.clear_canvas();
     engine.draw();
 
     $debug.html(
-        "Update Delay : " + engine.update_delay + "ms<br/>" +
+        "FPS : " + engine.fps,
         "Mouse : " + JSON.stringify(engine.mouse)
     );
 
