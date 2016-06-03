@@ -1,7 +1,13 @@
 #canvas{
     border: solid 1px black;
 }
-
+*:not(input){
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 #canvas:hover{
     cursor: pointer;
 }
@@ -18,5 +24,6 @@
 }
 
 .debug{
+    max-width: 500px;
     color: black;
 }
